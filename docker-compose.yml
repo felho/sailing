@@ -1,0 +1,29 @@
+mysqldata:
+  image: mysql:5.5
+  command: /bin/true
+
+mysql:
+  image: mysql:5.5
+  ports:
+    - "33066:3306"
+  environment:
+    - MYSQL_DATABASE=sailing
+    - MYSQL_USER=sailing
+    - MYSQL_PASSWORD=sailing
+    - MYSQL_ROOT_PASSWORD=root
+  volumes_from:
+    - mysqldata
+
+app:
+  build: .
+  ports:
+   - "8888:80"
+  hostname: localhost
+  volumes:
+   - .:/var/www
+  links:
+   - mysql
+  environment:
+   - ALLOW_OVERRIDE=true
+   - XDEBUG_CONFIG=“remote_host=10.220.5.199 remote_enable=1”
+   - PHP_IDE_CONFIG=“serverName=PHPSTORM”
