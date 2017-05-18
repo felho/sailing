@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('exam/random-item/{type?}', 'ExamController@getRandomItem');
