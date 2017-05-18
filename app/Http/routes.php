@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::get('exam/random-item/{type?}', 'ExamController@getRandomItem');
+Route::get('exam/save-practice/{questionId}', 'ExamController@savePractice');

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\Exam;
+use App\Practice;
 
 class ExamController extends Controller
 {
@@ -23,5 +24,19 @@ class ExamController extends Controller
 		}
 
 		return response()->json($item);
+	}
+
+	public function savePractice($questionId, Request $request)
+	{
+		$foo = Practice::create(
+            [
+                'user_name'       => $request->userName,
+                'question_id'     => $questionId,
+                'is_right_answer' => $request->isRightAnswer,
+                'answered_at'     => \Carbon\Carbon::now()->toDateTimeString(),
+            ]
+        );
+
+		return response()->json([$foo, \Carbon\Carbon::now()->toDateTimeString()]);
 	}
 }
