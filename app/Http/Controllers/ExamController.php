@@ -36,8 +36,10 @@ class ExamController extends Controller
 		$options = [
 			['text' => $item->good_answer, 'isRight' => true],
 			['text' => $item->bad_answer1, 'isRight' => false],
-			['text' => $item->bad_answer2, 'isRight' => false],
 		];
+		if ($item->bad_answer2) {
+			$options[] = ['text' => $item->bad_answer2, 'isRight' => false];
+		}
 		shuffle($options);
 
 		return response()->json(array(
