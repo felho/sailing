@@ -8,12 +8,12 @@
         <ul id="options">
             <li ng-repeat="option in options">
                 <label>
-                    <input type="radio" name="answer" value="{{option.isRight}}">
+                    <input type="radio" name="answer" value="{{option.isRight}}" onclick="$('#quiz-submit').click()">
                     {{option.text}}
                 </label>
             </li>
         </ul>
-        <button ng-click="checkAnswer()" ng-show="answerMode">Submit</button>
+        <button id="quiz-submit" ng-click="checkAnswer()" ng-show="answerMode">Submit</button>
  
         <div ng-show="!answerMode">
             <button ng-click="nextQuestion()" class="next-question">Next</button>
