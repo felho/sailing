@@ -17,7 +17,13 @@
         <div ng-show="!answerMode">
             <button ng-click="nextQuestion()" class="next-question">Next</button>
             <span ng-show="correctAns">That is correct!</span>
-            <span ng-hide="correctAns">Sorry, that is an incorrect answer.</span>
+            <span ng-hide="correctAns">Sorry, that is an incorrect answer.
+                <li ng-repeat="option in options">
+                    <label class="option-{{option.isRight}}">
+                        {{option.text}}
+                    </label>
+                </li>
+            </span>
         </div>
     </div>
  

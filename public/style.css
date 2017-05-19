@@ -43,3 +43,10 @@ button {
 	font-size: 18px;
 	font-weight: bold;
 }
+
+.option-true {
+	color: green;
+}
+.option-false {
+	display: none;
+}
