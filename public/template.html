@@ -4,14 +4,14 @@
         <ul id="options">
             <li ng-repeat="option in options">
                 <label>
-                    <input type="radio" name="answer" value="{{option}}">
-                    {{option}}
+                    <input type="radio" name="answer" value="{{option.isRight}}">
+                    {{option.text}} {{option.isRight}}
                 </label>
             </li>
         </ul>
         <button ng-click="checkAnswer()" ng-show="answerMode">Submit</button>
  
-                <div ng-show="!answerMode">
+        <div ng-show="!answerMode">
             <button ng-click="nextQuestion()" class="next-question">Next</button>
             <span ng-show="correctAns">That is correct!</span>
             <span ng-show="!correctAns">Sorry, that is an incorrect answer.</span>
@@ -22,11 +22,7 @@
         <h2>Quiz is over</h2>
         <button ng-click="reset()">Play again</button>
     </div>
- 
-    <div id="score">
-        Score: {{score}}
-    </div>
-</div>
+ </div>
 
  
 <div class="intro" ng-show="!inProgress">

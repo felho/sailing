@@ -20,10 +20,26 @@ class ExamController extends Controller
 		}
 
 		if ($item->picture) {
-			$item->picture = '/exam_db/hajozasi_ismeretek/'.$item->picture;
+			if ($item->type == 'regulation') {
+				$item->picture = '/exam_db/hajozasi_szabalyzat_kedvtelesei/'.$item->picture;
+			} else {
+				$item->picture = '/exam_db/hajozasi_ismeretek/'.$item->picture;
+			}
 		}
 
-		return response()->json($item);
+		$options = [
+			['text' => $item->good_answer, 'isRight' => true],
+			['text' => $item->bad_answer1, 'isRight' => false],
+			['text' => $item->bad_answer2, 'isRight' => false],
+		];
+		shuffle($options);
+
+		return response()->json(array(
+			'question' => $item->question,
+			'question_id' => $item->id,
+			'options' => $options,
+			'picture' => $item->picture ?: null,
+		));
 	}
 
 	public function savePractice($questionId, Request $request)
