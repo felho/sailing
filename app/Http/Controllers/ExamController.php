@@ -21,7 +21,7 @@ class ExamController extends Controller
 
 		if ($item->picture) {
 			if ($item->type == 'regulation') {
-				$item->picture = '/exam_db/hajozasi_szabalyzat_kedvtelesei/'.$item->picture;
+				$item->picture = '/exam_db/hajozasi_szabalyzat_kedvtelesi/'.$item->picture;
 			} else {
 				$item->picture = '/exam_db/hajozasi_ismeretek/'.$item->picture;
 			}

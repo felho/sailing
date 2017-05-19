@@ -20,6 +20,8 @@ app.directive('quiz', function($http) {
 			scope.getQuestion = function() {
 				$http.get('/exam/random-item').success(function (response) {
 					scope.question = response.question;
+					scope.questionId = response.question_id;
+					scope.picture = response.picture;
 					scope.options = response.options;
 					scope.picture = response.picture;
 					scope.answerMode = true;
@@ -28,12 +30,19 @@ app.directive('quiz', function($http) {
 
 			scope.checkAnswer = function() {
 				if(!$('input[name=answer]:checked').length) return;
-
 				var ans = $('input[name=answer]:checked').val();
-
 				scope.correctAns = ans;
 
-				scope.answerMode = false;
+				$http({
+					url: '/exam/save-practice/' + scope.questionId,
+					method: 'GET',
+					params: {
+                        'userName': 'felho',
+                        'isRightAnswer': ans
+                    }
+				}).success(function (response) {
+                    scope.answerMode = false;
+                });
 			};
 
 			scope.nextQuestion = function() {

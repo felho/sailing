@@ -1,6 +1,9 @@
 <div class="quiz-area" ng-show="inProgress">
     <div ng-show="!quizOver">
         <h2 id="question">{{question}}</h2>
+        <div ng-show="picture">
+            <img src="{{picture}}" />
+        </div>
         <ul id="options">
             <li ng-repeat="option in options">
                 <label>
@@ -14,7 +17,7 @@
         <div ng-show="!answerMode">
             <button ng-click="nextQuestion()" class="next-question">Next</button>
             <span ng-show="correctAns">That is correct!</span>
-            <span ng-show="!correctAns">Sorry, that is an incorrect answer.</span>
+            <span ng-hide="correctAns">Sorry, that is an incorrect answer.</span>
         </div>
     </div>
  
