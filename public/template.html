@@ -1,6 +1,7 @@
 <div class="quiz-area" ng-show="inProgress">
     <button ng-click="reset()">Play again</button>
     <div ng-show="!quizOver">
+        <br><button ng-click="nextQuestion()" class="next-question">Skip</button>
         <h2 id="question">{{question}}</h2>
         <div ng-show="picture">
             <img src="{{picture}}" />
@@ -13,7 +14,6 @@
                 </label>
             </li>
         </ul>
-        <button ng-click="nextQuestion()" class="next-question">Skip</button>
         <button id="quiz-submit" ng-click="checkAnswer()" ng-show="answerMode">Submit</button>
  
         <div ng-show="!answerMode">
