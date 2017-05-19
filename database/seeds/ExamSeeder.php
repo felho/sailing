@@ -15,14 +15,15 @@ class ExamSeeder extends Seeder
 	{
 		DB::table('exam')->delete();
 
-        $examDBDir = __DIR__.'/../../exam_db/hajozasi_ismeretek/';
+        $examDBDir = __DIR__.'/../../exam_db/';
 
-        $this->processSmallSailBoat($examDBDir, '001_vitorlaskishajo.csv');
+        // $this->processSimpleCsv($examDBDir.'hajozasi_ismeretek/', '001_kisgephajo.csv', 'motorboat');
+        // $this->processSimpleCsv($examDBDir.'hajozasi_ismeretek/', '001_vitorlaskishajo.csv', 'sailboat');
 	}
 
-    private function processSmallSailBoat($examDBDir, $csvFile)
+    private function processSimpleCsv($examDir, $csvFile, $type)
     {
-        $exam = file($examDBDir.$csvFile);
+        $exam = file($examDir.$csvFile);
         array_shift($exam);
 
         $match = array();
@@ -34,12 +35,12 @@ class ExamSeeder extends Seeder
                     $picture = $picture.'.jpg';
                 }
 
-                if (!file_exists($examDBDir.$picture)) {
-                    var_dump($question, $examDBDir.$picture);
+                if (!file_exists($examDir.$picture)) {
+                    var_dump($question, $examDir.$picture);
                 }
             }
 
-            $this->saveItem('sailboat', $question, $goodAnswer, $badAnswer1, $badanswer2, $picture);
+            $this->saveItem($type, $question, $goodAnswer, $badAnswer1, $badanswer2, $picture);
         }
     }
 
