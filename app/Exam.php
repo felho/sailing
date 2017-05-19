@@ -11,7 +11,9 @@ class Exam extends Model
 	protected $table = 'exam';
 
 	protected $fillable = [
+		'orig_csv_id',
 		'type',
+		'group_name',
 		'question',
 		'good_answer',
 		'bad_answer1',

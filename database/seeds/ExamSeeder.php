@@ -29,7 +29,7 @@ class ExamSeeder extends Seeder
 
         $match = array();
         foreach($exam as $key => $item) {
-            list($question, $answer1, $isRight1, $answer2, $isRight2, $answer3, $isRight3, $picture) = str_getcsv($item, ',', '"');
+            list($origCsvId, $question, $answer1, $isRight1, $answer2, $isRight2, $answer3, $isRight3, $picture) = str_getcsv($item, ',', '"');
 
             if (!empty($picture)) {
                 if (!strpos($picture, '.jpg') && !strpos($picture, '.png')) {
@@ -55,7 +55,7 @@ class ExamSeeder extends Seeder
                     var_dump($key, [$isRight1, $isRight2, $isRight3]);
             }
 
-            $this->saveItem($type, $question, $goodAnswer, $badAnswer1, $badanswer2, $picture);
+            $this->saveItem($origCsvId, $type, $question, $goodAnswer, $badAnswer1, $badanswer2, $picture);
         }
     }
 
@@ -66,7 +66,7 @@ class ExamSeeder extends Seeder
 
         $match = array();
         foreach($exam as $item) {
-            list($question, $goodAnswer, $badAnswer1, $badanswer2, $picture) = str_getcsv($item, ',', '"');
+            list($origCsvId, $question, $goodAnswer, $badAnswer1, $badanswer2, $picture) = str_getcsv($item, ',', '"');
 
             if (!empty($picture)) {
                 if (!strpos($picture, '.jpg')) {
@@ -78,14 +78,15 @@ class ExamSeeder extends Seeder
                 }
             }
 
-            $this->saveItem($type, $question, $goodAnswer, $badAnswer1, $badanswer2, $picture);
+            $this->saveItem($origCsvId, $type, $question, $goodAnswer, $badAnswer1, $badanswer2, $picture);
         }
     }
 
-    private function saveItem($type, $question, $goodAnswer, $badAnswer1, $badanswer2, $picture)
+    private function saveItem($origCsvId, $type, $question, $goodAnswer, $badAnswer1, $badanswer2, $picture)
     {
         Exam::create(
             [
+                'orig_csv_id' => $origCsvId,
                 'type'        => $type,
                 'question'    => $question,
                 'good_answer' => $goodAnswer,
