@@ -1,4 +1,5 @@
 <div class="quiz-area" ng-show="inProgress">
+    <button ng-click="reset()">Play again</button>
     <div ng-show="!quizOver">
         <h2 id="question">{{question}}</h2>
         <div ng-show="picture">
@@ -26,16 +27,11 @@
             </span>
         </div>
     </div>
- 
-    <div ng-show="quizOver">
-        <h2>Quiz is over</h2>
-        <button ng-click="reset()">Play again</button>
-    </div>
- </div>
+</div>
 
  
 <div class="intro" ng-show="!inProgress">
-    <p>Welcome to the QuizApp</p>
+    <p>Welcome to the Ultimate Sailing Tutorial</p>
     <select id="type-group">
         <option value="">whole exam</option>
         <option value="regulation|HSZ 01 - Általános vezetési ismeretek">HSZ 01 - Általános vezetési ismeretek</option>
