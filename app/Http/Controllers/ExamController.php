@@ -11,12 +11,18 @@ use App\Practice;
 
 class ExamController extends Controller
 {
-	public function getRandomItem($type = null)
+	public function getRandomItem(Request $request, $type = null)
 	{
+		$groupName = $request->groupName;
+
 		if (is_null($type)) {
 			$item = Exam::inRandomOrder()->first();
 		} else {
-			$item = Exam::where('type', '=', $type)->inRandomOrder()->first();
+			if ($groupName) {
+				$item = Exam::where('type', '=', $type)->where('group_name', '=', $groupName)->inRandomOrder()->first();
+			} else {
+				$item = Exam::where('type', '=', $type)->inRandomOrder()->first();
+			}
 		}
 
 		if ($item->picture) {
@@ -35,6 +41,7 @@ class ExamController extends Controller
 		shuffle($options);
 
 		return response()->json(array(
+			'orig_csv_id' => $item->orig_csv_id,
 			'question' => $item->question,
 			'question_id' => $item->id,
 			'options' => $options,

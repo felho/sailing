@@ -7,6 +7,17 @@ app.directive('quiz', function($http) {
 		templateUrl: '/template.html',
 		link: function(scope, elem, attrs) {
 			scope.start = function() {
+				scope.getRandomItemUrl = '/exam/random-item';
+				scope.getRandomItemParams = {};
+
+				var typeGroup = $('#type-group').val();
+				if (typeGroup != '') {
+					typeGroup = typeGroup.split('|');
+
+					scope.getRandomItemUrl += '/'+typeGroup[0];
+					scope.getRandomItemParams = {groupName: typeGroup[1]};
+				}
+
 				scope.id = 0;
 				scope.quizOver = false;
 				scope.inProgress = true;
@@ -18,7 +29,11 @@ app.directive('quiz', function($http) {
 			}
 
 			scope.getQuestion = function() {
-				$http.get('/exam/random-item').success(function (response) {
+				$http({
+					method: 'GET',
+					url: scope.getRandomItemUrl,
+					params: scope.getRandomItemParams
+				}).success(function (response) {
 					scope.question = response.question;
 					scope.questionId = response.question_id;
 					scope.picture = response.picture;

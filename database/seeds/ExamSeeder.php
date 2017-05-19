@@ -55,7 +55,22 @@ class ExamSeeder extends Seeder
                     var_dump($key, [$isRight1, $isRight2, $isRight3]);
             }
 
-            $this->saveItem($origCsvId, $type, $question, $goodAnswer, $badAnswer1, $badanswer2, $picture);
+            switch (true) {
+                case $origCsvId <= 65:
+                    $groupName = 'HSZ 01 - Általános vezetési ismeretek'; break;
+                case $origCsvId <= 170:
+                    $groupName = 'HSZ 02 - Hajóbiztonsági ismeretek'; break;
+                case $origCsvId <= 197:
+                    $groupName = 'HSZ 03 - Környezetvédelmi ismeretek'; break;
+                case $origCsvId <= 275:
+                    $groupName = 'HSZ 04 - Víziút, hajóút, kitűzés'; break;
+                case $origCsvId <= 382:
+                    $groupName = 'HSZ 05 - Vízi közlekedés irányítása - 1'; break;
+                default:
+                    $groupName = '';
+            }
+
+            $this->saveItem($origCsvId, $type, $question, $goodAnswer, $badAnswer1, $badanswer2, $picture, $groupName);
         }
     }
 
@@ -82,12 +97,13 @@ class ExamSeeder extends Seeder
         }
     }
 
-    private function saveItem($origCsvId, $type, $question, $goodAnswer, $badAnswer1, $badanswer2, $picture)
+    private function saveItem($origCsvId, $type, $question, $goodAnswer, $badAnswer1, $badanswer2, $picture, $groupName = '')
     {
         Exam::create(
             [
                 'orig_csv_id' => $origCsvId,
                 'type'        => $type,
+                'group_name'  => $groupName,
                 'question'    => $question,
                 'good_answer' => $goodAnswer,
                 'bad_answer1' => $badAnswer1,

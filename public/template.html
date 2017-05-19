@@ -30,5 +30,13 @@
  
 <div class="intro" ng-show="!inProgress">
     <p>Welcome to the QuizApp</p>
+    <select id="type-group">
+        <option value="">whole exam</option>
+        <option value="regulation|HSZ 01 - Általános vezetési ismeretek">HSZ 01 - Általános vezetési ismeretek</option>
+        <option value="regulation|HSZ 02 - Hajóbiztonsági ismeretek">HSZ 02 - Hajóbiztonsági ismeretek</option>
+        <option value="regulation|HSZ 03 - Környezetvédelmi ismeretek">HSZ 03 - Környezetvédelmi ismeretek</option>
+        <option value="regulation|HSZ 04 - Víziút, hajóút, kitűzés">HSZ 04 - Víziút, hajóút, kitűzés</option>
+        <option value="regulation|HSZ 05 - Vízi közlekedés irányítása - 1">HSZ 05 - Vízi közlekedés irányítása - 1</option>
+    </select>
     <button id="startQuiz" ng-click="start()">Start the Quiz</button>
 </div>
