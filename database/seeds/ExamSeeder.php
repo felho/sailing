@@ -57,19 +57,43 @@ class ExamSeeder extends Seeder
 
             switch (true) {
                 case $origCsvId <= 65:
-                    $groupName = 'HSZ 01 - Általános vezetési ismeretek'; break;
+                    $groupName = 'HSZ 01 - Általános vezetési ismeretek (1. nap)'; break;
                 case $origCsvId <= 170:
-                    $groupName = 'HSZ 02 - Hajóbiztonsági ismeretek'; break;
+                    $groupName = 'HSZ 02 - Hajóbiztonsági ismeretek (1. nap)'; break;
                 case $origCsvId <= 197:
-                    $groupName = 'HSZ 03 - Környezetvédelmi ismeretek'; break;
+                    $groupName = 'HSZ 03 - Környezetvédelmi ismeretek (1. nap)'; break;
                 case $origCsvId <= 275:
-                    $groupName = 'HSZ 04 - Víziút, hajóút, kitűzés'; break;
+                    $groupName = 'HSZ 04 - Víziút, hajóút, kitűzés (1. nap)'; break;
                 case $origCsvId <= 382:
-                    $groupName = 'HSZ 05 - Vízi közlekedés irányítása - 1'; break;
+                    $groupName = 'HSZ 05 - Vízi közlekedés irányítása - 1 (1. nap)'; break;
                 case $origCsvId <= 491:
-                    $groupName = 'HSZ 06 - Vízi közlekedés irányítása - 2'; break;
+                    $groupName = 'HSZ 06 - Vízi közlekedés irányítása - 2 (2. nap)'; break;
                 case $origCsvId <= 729:
-                    $groupName = 'HSZ 07 - Hajózási szabályok - 1'; break;
+                    $groupName = 'HSZ 07 - Hajózási szabályok - 1 (2. nap)'; break;
+                case $origCsvId <= 866:
+                    $groupName = 'HSZ 08 - Hajózási szabályok - 2 (3. nap)'; break;
+                case $origCsvId <= 1058:
+                    $groupName = 'HSZ 10 - Különleges jelzések (3. nap)'; break;
+                case $origCsvId <= 1088:
+                    $groupName = 'HSZ 11 - Hangjelzések, rádió, AIS (4. nap)'; break;
+                case $origCsvId <= 1115:
+                    $groupName = 'HSZ 12 - Korlátozott látási viszonyok (4. nap)'; break;
+                case $origCsvId <= 1142:
+                    $groupName = 'HSZ 13 - Veszteglés (4. nap)'; break;
+                case $origCsvId <= 1158:
+                    $groupName = 'HSZ 14 - Kompok, hajóhíd (4. nap)'; break;
+                case $origCsvId <= 1198:
+                    $groupName = 'HSZ 15 - Műtárgyak (4. nap)'; break;
+                case $origCsvId <= 1238:
+                    $groupName = 'HSZ 16 - Tavi jelzések (4. nap)'; break;
+                case $origCsvId <= 1278:
+                    $groupName = 'HSZ 17 - Nappali és éjszakai jelzések - 2 (4. nap)'; break;
+                case $origCsvId <= 1318:
+                    $groupName = 'HSZ 18 - Hajózási szabályok - 3 (4. nap)'; break;
+                case $origCsvId <= 1369:
+                    $groupName = 'HSZ 19 - Hajózási szabályok - 4 (4. nap)'; break;
+                case $origCsvId <= 1420:
+                    $groupName = 'HSZ 20 - Hajózási szabályok - 5 (4. nap)'; break;
                 default:
                     $groupName = '';
             }
