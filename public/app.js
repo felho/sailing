@@ -28,6 +28,19 @@ app.directive('quiz', function($http) {
 				scope.inProgress = false;
 			}
 
+			scope.skip = function() {
+				$http({
+					url: '/exam/save-practice/' + scope.questionId,
+					method: 'GET',
+					params: {
+                        'userName': 'felho',
+                        'isRightAnswer': 2
+                    }
+				}).success(function (response) {
+                    scope.getQuestion();
+                });
+			}
+
 			scope.getQuestion = function() {
 				$http({
 					method: 'GET',
@@ -59,11 +72,6 @@ app.directive('quiz', function($http) {
                     scope.answerMode = false;
                 });
 			};
-
-			scope.nextQuestion = function() {
-				scope.id++;
-				scope.getQuestion();
-			}
 
 			scope.reset();
 		}
