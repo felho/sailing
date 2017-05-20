@@ -24,7 +24,7 @@ class ExamController extends Controller
 
         $buildQuery = function($where = []) use ($pdo, $userName) {
             foreach ($where as $field => &$value) {
-                $value = ' AND field = ' . $pdo->quote;
+                $value = ' AND field = ' . $pdo->quote($value);
             }
 
             $where = join("\n", $where);
