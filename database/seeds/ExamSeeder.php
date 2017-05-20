@@ -121,17 +121,24 @@ class ExamSeeder extends Seeder
                 }
             }
 
+            $groupName = '';
             if ($csvFile == '001_vitorlaskishajo.csv') {
                 switch ($group) {
                     case 2:
                         $groupName = 'Hajózási ismeretek - Közös vitorlás és kisgéphajós (2. nap)'; break;
+                    case 3:
+                        $groupName = 'Hajózási ismeretek - Közös vitorlás és kisgéphajós (3. nap)'; break;
                     case 4:
-                        $groupName = 'Hajózási ismeretek - Vitorlás kérdések 4. nap'; break;
-                    default:
-                        $groupName = '';
+                        $groupName = 'Hajózási ismeretek - Vitorlás kérdések (4. nap)'; break;
                 }
-            } else {
-                $groupName = '';
+            }
+            if ($csvFile == '001_kisgephajo.csv') {
+                switch ($group) {
+                    case 0:
+                        $groupName = 'Hajózási ismeretek - Kisgéphajós kérdések, amik már voltak a közös részben'; break;
+                    case 4:
+                        $groupName = 'Hajózási ismeretek - Kisgéphajós kérdések (4. nap)'; break;
+                }
             }
 
             $this->saveItem($origCsvId, $type, $question, $goodAnswer, $badAnswer1, $badanswer2, $picture, $groupName);
