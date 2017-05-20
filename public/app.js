@@ -20,7 +20,7 @@ app.directive('quiz', function($http) {
 					typeGroup = typeGroup.split('|');
 
 					scope.getRandomItemUrl += '/'+typeGroup[0];
-					scope.getRandomItemParams = {groupName: typeGroup[1]};
+					scope.getRandomItemParams = {groupName: typeGroup[1], userName: scope.username};
 				}
 
 				scope.id = 0;
