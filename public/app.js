@@ -13,7 +13,7 @@ app.directive('quiz', function($http) {
 
 			scope.start = function() {
 				scope.getRandomItemUrl = '/exam/random-item';
-				scope.getRandomItemParams = {};
+				scope.getRandomItemParams = {userName: scope.username};
 
 				var typeGroup = $('#type-group').val();
 				if (typeGroup != '') {
