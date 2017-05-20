@@ -8,26 +8,59 @@ use App\Http\Requests;
 
 use App\Exam;
 use App\Practice;
+use DB;
 
 class ExamController extends Controller
 {
 	public function getRandomItem(Request $request, $type = null)
 	{
-		$groupName = $request->groupName;
+        $pdo       = DB::connection()->getPdo();
+        $groupName = $request->groupName;
+        $userName  = $pdo->quote($request->userName);
 
-		if (is_null($type)) {
-			$item = Exam::inRandomOrder()->first();
-		} else {
+        $joinFunction     = function($join) {
+            $join->on('exam.id', '=', 'sub.question_id');
+        };
+
+        $buildQuery = function($where = []) use ($pdo, $userName) {
+            foreach ($where as $field => &$value) {
+                $value = ' AND field = ' . $pdo->quote;
+            }
+
+            $where = join("\n", $where);
+
+            return "(
+                select 
+                    question_id, count(*) count 
+                from 
+                    practice 
+                where 
+                    is_right_answer > 0 
+                    and user_name = $userName
+                    $where
+                group by question_id
+            ) sub";
+        };
+
+        $predicate = [];
+
+		if (!is_null($type)) {
 			if ($groupName) {
 				if ($type == '*') {
-					$item = Exam::where('group_name', '=', $groupName)->inRandomOrder()->first();
+				    $predicate = ['group_name' => $groupName];
 				} else {
-					$item = Exam::where('type', '=', $type)->where('group_name', '=', $groupName)->inRandomOrder()->first();
+				    $predicate = ['type' => $type, 'group_name' => $groupName];
 				}
 			} else {
-				$item = Exam::where('type', '=', $type)->inRandomOrder()->first();
+				$predicate = ['type' => $type];
 			}
 		}
+
+		$item = DB::table('exam')
+            ->leftJoin(DB::raw($buildQuery($predicate)), $joinFunction)
+            ->orderBy(DB::raw('coalesce(sub.count, 0)'))
+            ->orderBy(DB::raw('rand()'))
+            ->first();
 
 		if ($item->picture) {
 			if ($item->type == 'regulation') {

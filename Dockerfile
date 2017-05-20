@@ -12,6 +12,7 @@ WORKDIR /var/www
 
 RUN mkdir -p /var/www/storage/logs
 RUN mkdir -p /var/www/bootstrap/cache
+RUN ln -sf /var/www/exam_db /var/www/public/exam_db
 RUN chown -R www-data:www-data /var/www
 
 USER www-data
