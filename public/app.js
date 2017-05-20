@@ -65,7 +65,6 @@ app.directive('quiz', function($http) {
 				if(!$('input[name=answer]:checked').length) return;
 				var ans = $('input[name=answer]:checked').val();
 				scope.correctAns = ans;
-				alert(scope.correctAns);
 
 				$http({
 					url: '/exam/save-practice/' + scope.questionId,
