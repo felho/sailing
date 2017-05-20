@@ -6,6 +6,11 @@ app.directive('quiz', function($http) {
 		scope: {},
 		templateUrl: '/template.html',
 		link: function(scope, elem, attrs) {
+			scope.setUsername = function() {
+				scope.username = $('input[name=username]').val();
+				scope.isUserSet = true;
+			}
+
 			scope.start = function() {
 				scope.getRandomItemUrl = '/exam/random-item';
 				scope.getRandomItemParams = {};
@@ -33,7 +38,7 @@ app.directive('quiz', function($http) {
 					url: '/exam/save-practice/' + scope.questionId,
 					method: 'GET',
 					params: {
-                        'userName': 'felho',
+                        'userName': scope.username,
                         'isRightAnswer': 2
                     }
 				}).success(function (response) {
@@ -60,13 +65,14 @@ app.directive('quiz', function($http) {
 				if(!$('input[name=answer]:checked').length) return;
 				var ans = $('input[name=answer]:checked').val();
 				scope.correctAns = ans;
+				alert(scope.correctAns);
 
 				$http({
 					url: '/exam/save-practice/' + scope.questionId,
 					method: 'GET',
 					params: {
-                        'userName': 'felho',
-                        'isRightAnswer': ans
+                        'userName': scope.username,
+                        'isRightAnswer': scope.correctAns == 'true' ? 1 : 0,
                     }
 				}).success(function (response) {
                     scope.answerMode = false;

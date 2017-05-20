@@ -1,5 +1,6 @@
 <div class="quiz-area" ng-show="inProgress">
     <button ng-click="reset()">Play again</button>
+    {{username}}
     <div ng-show="!quizOver">
         <br><button ng-click="skip()" class="next-question">Skip</button>
         <h2 id="question">{{question}}</h2>
@@ -32,14 +33,21 @@
 
  
 <div class="intro" ng-show="!inProgress">
-    <p>Welcome to The Ultimate Sailing Tutorial</p>
-    <select id="type-group">
-        <option value="">whole exam</option>
-        <option value="regulation|HSZ 01 - Általános vezetési ismeretek">HSZ 01 - Általános vezetési ismeretek</option>
-        <option value="regulation|HSZ 02 - Hajóbiztonsági ismeretek">HSZ 02 - Hajóbiztonsági ismeretek</option>
-        <option value="regulation|HSZ 03 - Környezetvédelmi ismeretek">HSZ 03 - Környezetvédelmi ismeretek</option>
-        <option value="regulation|HSZ 04 - Víziút, hajóút, kitűzés">HSZ 04 - Víziút, hajóút, kitűzés</option>
-        <option value="regulation|HSZ 05 - Vízi közlekedés irányítása - 1">HSZ 05 - Vízi közlekedés irányítása - 1</option>
-    </select>
-    <button id="startQuiz" ng-click="start()">Start the Quiz</button>
+    <div ng-hide="isUserSet">
+        Please enter your user name: <input name="username">
+        <button  ng-click="setUsername()">Next</button>
+    </div>
+    <div ng-show="isUserSet">
+        {{username}}: Please select the quiz you are interested in.
+        <br><br>
+        <select id="type-group">
+            <option value="">whole exam</option>
+            <option value="regulation|HSZ 01 - Általános vezetési ismeretek">HSZ 01 - Általános vezetési ismeretek</option>
+            <option value="regulation|HSZ 02 - Hajóbiztonsági ismeretek">HSZ 02 - Hajóbiztonsági ismeretek</option>
+            <option value="regulation|HSZ 03 - Környezetvédelmi ismeretek">HSZ 03 - Környezetvédelmi ismeretek</option>
+            <option value="regulation|HSZ 04 - Víziút, hajóút, kitűzés">HSZ 04 - Víziút, hajóút, kitűzés</option>
+            <option value="regulation|HSZ 05 - Vízi közlekedés irányítása - 1">HSZ 05 - Vízi közlekedés irányítása - 1</option>
+        </select>
+        <button id="startQuiz" ng-click="start()">Start the Quiz</button>
+    </div>
 </div>
