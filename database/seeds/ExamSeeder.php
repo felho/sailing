@@ -66,6 +66,10 @@ class ExamSeeder extends Seeder
                     $groupName = 'HSZ 04 - Víziút, hajóút, kitűzés'; break;
                 case $origCsvId <= 382:
                     $groupName = 'HSZ 05 - Vízi közlekedés irányítása - 1'; break;
+                case $origCsvId <= 491:
+                    $groupName = 'HSZ 06 - Vízi közlekedés irányítása - 2'; break;
+                case $origCsvId <= 729:
+                    $groupName = 'HSZ 07 - Hajózási szabályok - 1'; break;
                 default:
                     $groupName = '';
             }
@@ -81,7 +85,7 @@ class ExamSeeder extends Seeder
 
         $match = array();
         foreach($exam as $item) {
-            list($origCsvId, $question, $goodAnswer, $badAnswer1, $badanswer2, $picture) = str_getcsv($item, ',', '"');
+            list($origCsvId, $group, $question, $goodAnswer, $badAnswer1, $badanswer2, $picture) = str_getcsv($item, ',', '"');
 
             if (!empty($picture)) {
                 if (!strpos($picture, '.jpg')) {
@@ -93,7 +97,20 @@ class ExamSeeder extends Seeder
                 }
             }
 
-            $this->saveItem($origCsvId, $type, $question, $goodAnswer, $badAnswer1, $badanswer2, $picture);
+            if ($csvFile == '001_vitorlaskishajo.csv') {
+                switch ($group) {
+                    case 2:
+                        $groupName = 'Hajózási ismeretek - Közös vitorlás és kisgéphajós (2. nap)'; break;
+                    case 4:
+                        $groupName = 'Hajózási ismeretek - Vitorlás kérdések 4. nap'; break;
+                    default:
+                        $groupName = '';
+                }
+            } else {
+                $groupName = '';
+            }
+
+            $this->saveItem($origCsvId, $type, $question, $goodAnswer, $badAnswer1, $badanswer2, $picture, $groupName);
         }
     }
 

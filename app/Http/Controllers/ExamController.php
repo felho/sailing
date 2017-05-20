@@ -19,7 +19,11 @@ class ExamController extends Controller
 			$item = Exam::inRandomOrder()->first();
 		} else {
 			if ($groupName) {
-				$item = Exam::where('type', '=', $type)->where('group_name', '=', $groupName)->inRandomOrder()->first();
+				if ($type == '*') {
+					$item = Exam::where('group_name', '=', $groupName)->inRandomOrder()->first();
+				} else {
+					$item = Exam::where('type', '=', $type)->where('group_name', '=', $groupName)->inRandomOrder()->first();
+				}
 			} else {
 				$item = Exam::where('type', '=', $type)->inRandomOrder()->first();
 			}
