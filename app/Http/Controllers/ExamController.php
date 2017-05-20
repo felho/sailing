@@ -22,25 +22,16 @@ class ExamController extends Controller
             $join->on('exam.id', '=', 'sub.question_id');
         };
 
-        $buildQuery = function($where = []) use ($pdo, $userName) {
-            foreach ($where as $field => &$value) {
-                $value = ' AND field = ' . $pdo->quote($value);
-            }
-
-            $where = join("\n", $where);
-
-            return "(
-                select 
-                    question_id, count(*) count 
-                from 
-                    practice 
-                where 
-                    is_right_answer > 0 
-                    and user_name = $userName
-                    $where
-                group by question_id
-            ) sub";
-        };
+        $subQuery = "(
+            select 
+                question_id, count(*) count 
+            from 
+                practice 
+            where 
+                is_right_answer > 0 
+                and user_name = $userName
+            group by question_id
+        ) sub";
 
         $predicate = [];
 
@@ -56,9 +47,13 @@ class ExamController extends Controller
 			}
 		}
 
-		$item = DB::table('exam')
-            ->leftJoin(DB::raw($buildQuery($predicate)), $joinFunction)
-            ->orderBy(DB::raw('coalesce(sub.count, 0)'))
+		$q = DB::table('exam')->leftJoin(DB::raw($subQuery), $joinFunction);
+
+		foreach ($predicate as $field => $value) {
+		    $q->where($field, '=', $value);
+        }
+
+        $item = $q->orderBy(DB::raw('coalesce(sub.count, 0)'))
             ->orderBy(DB::raw('rand()'))
             ->first();
 
