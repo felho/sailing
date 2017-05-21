@@ -43,14 +43,12 @@ app.directive('quiz', function($http, $document) {
 							input.prop("checked", true);
 							angular.element(input).click();
 					}
-				} else {
-					if ($event.keyCode == 32) {
-						$('#nextButton').click();
-					}
-				}
-				if (!scope.quizOver) {
-					if ($event.keyCode == 27) {
+					if ($event.keyCode == 39) {
 						$('#skipButton').click();
+					}
+				} else {
+					if ($event.keyCode == 39) {
+						$('#nextButton').click();
 					}
 				}
 				console.log($event.keyCode);

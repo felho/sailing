@@ -2,7 +2,9 @@
     <button ng-click="reset()">Play again</button>
     {{username}}
     <div ng-show="!quizOver">
-        <br><button id="skipButton" ng-click="skip()" class="next-question">Skip</button>
+        <br>
+        <button ng-show="!answerMode" id="skipButton" ng-click="skip()" class="next-question">Skip</button>
+        <button ng-show="answerMode" id="skipButton" ng-click="skip()" class="next-question">Skip (→)</button>
         <h2 id="question">{{origQuestionNum}}. {{question}}</h2>
         <div ng-show="picture">
             <img src="{{picture}}" style="max-width: 600px"/>
@@ -11,14 +13,14 @@
             <li ng-repeat="option in options">
                 <label>
                     <input type="radio" name="answer" value="{{option.isRight}}" onclick="$('#quiz-submit').click()">
-                    {{option.text}}
+                    ({{$index+1}}) {{option.text}}
                 </label>
             </li>
         </ul>
         <button id="quiz-submit" ng-click="checkAnswer()" ng-show="answerMode">Submit</button>
  
         <div ng-show="!answerMode">
-            <button id="nextButton" ng-click="getQuestion()" class="next-question">Next</button>
+            <button id="nextButton" ng-click="getQuestion()" class="next-question">Next (→)</button>
             <span ng-show="correctAns">That is correct!</span>
             <span ng-hide="correctAns">Sorry, that is an incorrect answer.
                 <li ng-repeat="option in options">
