@@ -68,6 +68,8 @@ class ExamSeeder extends Seeder
                     $groupName = 'HSZ 05 - Vízi közlekedés irányítása - 1 (1. nap)'; break;
                 case $origCsvId <= 491:
                     $groupName = 'HSZ 06 - Vízi közlekedés irányítása - 2 (2. nap)'; break;
+                case $origCsvId >= 495 && $origCsvId <= 647:
+                    $groupName = 'HSZ 07 - Hajózási szabályok - 1 - Dummy (2. nap)'; break;
                 case $origCsvId <= 729:
                     $groupName = 'HSZ 07 - Hajózási szabályok - 1 (2. nap)'; break;
                 case $origCsvId <= 866:
