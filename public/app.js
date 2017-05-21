@@ -51,7 +51,6 @@ app.directive('quiz', function($http, $document) {
 						$('#nextButton').click();
 					}
 				}
-				console.log($event.keyCode);
 			}
 			$document.bind('keyup', scope.manageShortcuts);
 
