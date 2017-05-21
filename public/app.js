@@ -54,6 +54,7 @@ app.directive('quiz', function($http) {
 				}).success(function (response) {
 					scope.question = response.question;
 					scope.questionId = response.question_id;
+					scope.origQuestionNum = response.orig_csv_id-1;
 					scope.picture = response.picture;
 					scope.options = response.options;
 					scope.picture = response.picture;

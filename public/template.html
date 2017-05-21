@@ -3,7 +3,7 @@
     {{username}}
     <div ng-show="!quizOver">
         <br><button ng-click="skip()" class="next-question">Skip</button>
-        <h2 id="question">{{question}}</h2>
+        <h2 id="question">{{origQuestionNum}}. {{question}}</h2>
         <div ng-show="picture">
             <img src="{{picture}}" style="max-width: 600px"/>
         </div>
