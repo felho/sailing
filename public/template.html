@@ -2,7 +2,7 @@
     <button ng-click="reset()">Play again</button>
     {{username}}
     <div ng-show="!quizOver">
-        <br><button ng-click="skip()" class="next-question">Skip</button>
+        <br><button id="skipButton" ng-click="skip()" class="next-question">Skip</button>
         <h2 id="question">{{origQuestionNum}}. {{question}}</h2>
         <div ng-show="picture">
             <img src="{{picture}}" style="max-width: 600px"/>
@@ -18,7 +18,7 @@
         <button id="quiz-submit" ng-click="checkAnswer()" ng-show="answerMode">Submit</button>
  
         <div ng-show="!answerMode">
-            <button ng-click="getQuestion()" class="next-question">Next</button>
+            <button id="nextButton" ng-click="getQuestion()" class="next-question">Next</button>
             <span ng-show="correctAns">That is correct!</span>
             <span ng-hide="correctAns">Sorry, that is an incorrect answer.
                 <li ng-repeat="option in options">
@@ -35,7 +35,7 @@
 <div class="intro" ng-show="!inProgress">
     <div ng-hide="isUserSet">
         Please enter your user name: <input name="username">
-        <button  ng-click="setUsername()">Next</button>
+        <button ng-click="setUsername()">Next</button>
     </div>
     <div ng-show="isUserSet">
         {{username}}: Please select the quiz you are interested in.

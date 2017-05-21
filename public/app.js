@@ -1,6 +1,6 @@
 var app = angular.module('quizApp', []);
 
-app.directive('quiz', function($http) {
+app.directive('quiz', function($http, $document) {
 	return {
 		restrict: 'AE',
 		scope: {},
@@ -32,6 +32,30 @@ app.directive('quiz', function($http) {
 			scope.reset = function() {
 				scope.inProgress = false;
 			}
+
+			scope.manageShortcuts = function($event) {
+				if (scope.answerMode) {
+					switch ($event.keyCode) {
+						case 49:
+						case 50:
+						case 51:
+							var input = $($('input[name=answer]').get($event.keyCode-49));
+							input.prop("checked", true);
+							angular.element(input).click();
+					}
+				} else {
+					if ($event.keyCode == 32) {
+						$('#nextButton').click();
+					}
+				}
+				if (!scope.quizOver) {
+					if ($event.keyCode == 27) {
+						$('#skipButton').click();
+					}
+				}
+				console.log($event.keyCode);
+			}
+			$document.bind('keyup', scope.manageShortcuts);
 
 			scope.skip = function() {
 				$http({
