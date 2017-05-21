@@ -13,7 +13,7 @@ class ExamSeeder extends Seeder
      */
 	public function run()
 	{
-		DB::table('exam')->delete();
+		DB::table('exam')->truncate();
 
         $examDBDir = __DIR__.'/../../exam_db/';
 
