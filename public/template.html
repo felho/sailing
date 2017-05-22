@@ -5,7 +5,7 @@
         <br>
         <button ng-show="!answerMode" id="skipButton" ng-click="skip()" class="next-question">Skip</button>
         <button ng-show="answerMode" id="skipButton" ng-click="skip()" class="next-question">Skip (→)</button>
-        <span class="countdown" ng-show="answerMode">{{countdown}}</span>
+        <span id="countdown" class="countdown" ng-show="answerMode">{{countdown}}</span>
         <h2 id="question">{{origQuestionNum}}. {{question}}</h2>
         <div ng-show="picture">
             <img src="{{picture}}" style="max-width: 600px"/>

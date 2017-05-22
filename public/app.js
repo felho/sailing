@@ -88,6 +88,7 @@ app.directive('quiz', function($http, $document) {
 			scope.startTimer = function () {
 				if (scope.timer) {
 					clearInterval(scope.timer);
+					$('#countdown').removeClass('countdown-15-sec-left');
 				}
 
 				scope.countdown = 60;
@@ -96,6 +97,9 @@ app.directive('quiz', function($http, $document) {
 						clearInterval(scope.timer);
 					}
 					scope.countdown--;
+					if (scope.countdown == 15) {
+						$('#countdown').addClass('countdown-15-sec-left');
+					}
 					scope.$apply();
 				}, 1000);
 			}

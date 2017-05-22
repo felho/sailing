@@ -26,6 +26,14 @@ button {
 .countdown {
 	font-size: 25px;
 	font-weight: bold;
+	color: green;
+	float: right;
+}
+
+.countdown-15-sec-left {
+	font-size: 25px;
+	font-weight: bold;
+	color: red;
 	float: right;
 }
 
