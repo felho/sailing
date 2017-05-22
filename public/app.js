@@ -116,9 +116,8 @@ app.directive('quiz', function($http, $document) {
                         'userName': scope.username,
                         'isRightAnswer': scope.correctAns == 'true' ? 1 : 0,
                     }
-				}).success(function (response) {
-                    scope.answerMode = false;
-                });
+				});
+                scope.answerMode = false;
 			};
 
 			scope.reset();
