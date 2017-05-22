@@ -23,6 +23,11 @@ button {
 	cursor: pointer;
 }
 
+.countdown {
+	font-size: 25px;
+	font-weight: bold;
+	float: right;
+}
 
 .container {
 	width: 480px;
@@ -36,12 +41,6 @@ button {
 
 .next-question {
 	margin-right: 10px;
-}
-
-#score {
-	margin-top: 10px;
-	font-size: 18px;
-	font-weight: bold;
 }
 
 .option-true {

@@ -80,8 +80,25 @@ app.directive('quiz', function($http, $document) {
 					scope.options = response.options;
 					scope.picture = response.picture;
 					scope.answerMode = true;
+
+					scope.startTimer();
 				});
 			};
+
+			scope.startTimer = function () {
+				if (scope.timer) {
+					clearInterval(scope.timer);
+				}
+
+				scope.countdown = 60;
+				scope.timer = setInterval(function () {
+					if (!scope.answerMode || scope.countdown <= 1) {
+						clearInterval(scope.timer);
+					}
+					scope.countdown--;
+					scope.$apply();
+				}, 1000);
+			}
 
 			scope.checkAnswer = function() {
 				if(!$('input[name=answer]:checked').length) return;
